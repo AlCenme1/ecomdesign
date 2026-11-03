@@ -1,0 +1,7 @@
+ceiling,strategy,feasible,tested,success_pct
+0.1 mM,random,3,30,10.0
+0.1 mM,stoichiometry,20,30,66.7
+0.1 mM,thermodynamics,30,30,100.0
+10 mM,random,4,30,13.3
+10 mM,stoichiometry,30,30,100.0
+10 mM,thermodynamics,30,30,100.0

@@ -1,0 +1,11 @@
+carbon,concentration,n,facilitation_pct,inhibition_pct
+Glucose,1x,744,4.0,82.0
+Glucose,0.1x,742,6.2,59.6
+Glycerol,1x,706,16.4,65.4
+Glycerol,0.1x,718,3.3,69.4
+Proline,1x,742,34.2,38.0
+Proline,0.1x,708,6.5,58.2
+Pyruvate,1x,738,7.9,76.2
+Pyruvate,0.1x,734,4.9,59.7
+Sucrose,1x,756,27.5,32.8
+Sucrose,0.1x,754,9.5,23.1

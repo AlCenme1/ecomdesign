@@ -1,0 +1,12 @@
+term,beta_energy,se_naive,se_dyadic,z_dyadic
+Intercept,7.799,0.933,2.19,-3.561
+Producer aerobic,2.261,0.389,0.999,-2.262
+Producer carbon sources,-0.175,0.149,0.206,0.849
+Producer knockouts,0.339,0.151,0.23,-1.475
+Consumer aerobic,-0.405,0.462,0.619,0.654
+Consumer carbon sources,0.102,0.185,0.338,-0.302
+Consumer knockouts,0.445,0.174,0.312,-1.429
+Competition C,-2.537,0.893,2.176,1.166
+Complementarity K,-2.295,0.372,0.802,2.863
+No feasible window,4.839,0.837,2.077,-2.329
+Window G/RT,-0.791,0.098,0.156,5.06

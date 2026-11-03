@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ecomdesign — results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<script>/*__D3__*/</script>
+<style>
+  :root {
+    --ink: #1B3A4B; --red: #8C1D1D; --cream: #F4EDE4;
+    --bg: #FFFFFF; --panel: #FFFFFF; --line: #E2DCD3;
+    --fg: #1B3A4B; --dim: #6B7B86; --accent: #8C1D1D; --blue: #2F6F8F;
+    --grid: #ECE6DC; --radius: 6px;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "Source Sans 3", -apple-system, "Segoe UI", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11202A; --panel: #162A36; --line: #27404E; --cream: #1B3340;
+      --fg: #EDE6DA; --dim: #9DB0BC; --grid: #223845; --blue: #6AA9C9; --accent: #D4756F;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11202A; --panel: #162A36; --line: #27404E; --cream: #1B3340;
+    --fg: #EDE6DA; --dim: #9DB0BC; --grid: #223845; --blue: #6AA9C9; --accent: #D4756F;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans);
+         font-size: 15px; line-height: 1.55; }
+  .wrap { max-width: 1180px; margin-inline: auto;
+          padding-left: max(18px, env(safe-area-inset-left, 0px));
+          padding-right: max(18px, env(safe-area-inset-right, 0px));
+          padding-block: 1.8rem 3rem; }
+  header.brand { display: flex; align-items: center; gap: 1.1rem;
+                 border-bottom: 2px solid var(--red); padding-bottom: 1rem; }
+  header.brand svg { height: 76px; width: auto; flex: none; }
+  .brand h1 { font-family: var(--serif); font-size: 1.9rem; font-weight: 600;
+              margin: 0; letter-spacing: -0.01em; }
+  .brand p { margin: 0.2rem 0 0; color: var(--red); font-size: 0.92rem; letter-spacing: 0.03em; }
+  .theme { margin-left: auto; background: none; border: 1px solid var(--line);
+           color: var(--dim); border-radius: 999px; padding: 0.3rem 0.8rem;
+           font: inherit; font-size: 0.8rem; cursor: pointer; }
+  .theme:hover { color: var(--fg); border-color: var(--dim); }
+  .lede { max-width: 66ch; color: var(--dim); margin: 1.4rem 0 0; }
+  .tiles { display: grid; gap: 1rem; margin-block-start: 1.6rem;
+           grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  .card { background: var(--panel); border: 1px solid var(--line);
+          border-radius: var(--radius); padding: 1rem 1.1rem; min-width: 0; }
+  .tile .lbl { font-size: 0.8rem; color: var(--dim); display: block; }
+  .tile .big { font-family: var(--serif); font-size: 2.1rem; font-weight: 400;
+               font-variant-numeric: tabular-nums; display: block; margin-top: 0.25rem;
+               color: var(--ink); }
+  :root[data-theme="dark"] .tile .big, @media (prefers-color-scheme: dark) { }
+  .tile .big { color: inherit; }
+  section { margin-block-start: 2.6rem; }
+  section > h2 { font-family: var(--serif); font-size: 1.28rem; font-weight: 600;
+                 margin: 0 0 0.3rem; text-wrap: balance; }
+  section > p.sub { margin: 0 0 1rem; color: var(--dim); max-width: 72ch; font-size: 0.93rem; }
+  .grid { display: grid; gap: 1rem;
+          grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  .card h3 { font-size: 0.98rem; font-weight: 600; margin: 0; font-family: var(--sans); }
+  .card .note { font-size: 0.82rem; color: var(--dim); margin: 0.2rem 0 0; }
+  .plot { position: relative; margin-top: 0.7rem; }
+  .tip { position: absolute; pointer-events: none; opacity: 0; z-index: 5;
+         background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+         box-shadow: 0 6px 18px rgba(27, 58, 75, .16); padding: 0.35rem 0.55rem;
+         font-size: 0.78rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tip .k { color: var(--dim); display: block; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem;
+          font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 0.3rem 0.45rem; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--dim); font-weight: 600; }
+  .scroll { overflow-x: auto; }
+  .src { margin-top: 0.6rem; font-size: 0.76rem; color: var(--dim); }
+  .src summary { cursor: pointer; }
+  .src code { font-size: 0.74rem; background: var(--cream); padding: 0.05rem 0.3rem;
+              border-radius: 3px; }
+  footer { margin-block-start: 3rem; padding-block-start: 1.2rem;
+           border-top: 1px solid var(--line); color: var(--dim);
+           font-size: 0.82rem; max-width: 76ch; }
+  footer a { color: var(--accent); }
+  @media (max-width: 560px) { header.brand svg { height: 56px; } .brand h1 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="brand">
+    <!--__LOGO__-->
+    <div>
+      <h1>ecomdesign</h1>
+      <p>DESIGNING MICROBIAL CONSORTIA ON AN EXPLICIT ENERGY SCALE</p>
+    </div>
+    <button class="theme" id="theme">Dark</button>
+  </header>
+
+  <p class="lede">Every number here comes from the pipeline's own output: a mechanistic benchmark of
+  80 strains, a curated 17-taxon hypersaline community with two introduced reconstructions, and a
+  published co-culture screen of 20 soil bacteria. Growth rates are per hour; interaction energies
+  are in units of the noise temperature <i>T</i>.</p>
+
+  <div class="tiles">
+    <div class="card tile"><span class="lbl">Cross-feeding removed by thermodynamics at 10 µM</span><b class="big" id="t1">—</b></div>
+    <div class="card tile"><span class="lbl">Average precision with the exchange window, 10 µM</span><b class="big" id="t2">—</b></div>
+    <div class="card tile"><span class="lbl">Designed consortia feasible at 0.1 mM, out of 30</span><b class="big" id="t3">—</b></div>
+    <div class="card tile"><span class="lbl">Odds of facilitation under tenfold carbon dilution</span><b class="big" id="t4">—</b></div>
+  </div>
+
+  <section>
+    <h2>Thermodynamics removes cross-feeding when by-products stay dilute</h2>
+    <p class="sub">A producer must keep a by-product low enough to secrete it; a consumer needs it
+    high enough to use it. Lowering the concentration ceiling closes that window.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Feasible producer–consumer pairs</h3>
+        <p class="note">Out of 1,596 candidates. Pale: stoichiometry alone. Solid: with thermodynamics.</p>
+        <div class="plot" id="filterChart"></div>
+      </div>
+      <div class="card">
+        <h3>Cross-validated average precision</h3>
+        <p class="note">Node-split cross-validation, mean of 100 splits. M2 uses stoichiometry;
+        M3 adds the exchange window.</p>
+        <div class="plot" id="cvChart"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What the interaction energy is made of</h2>
+    <p class="sub">Model M3 at a 0.1 mM ceiling. Negative energies raise the probability of
+    interaction. Dyadic-robust standard errors account for pairs that share a strain.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Energy coefficients</h3>
+        <p class="note">Strain traits are standardised; <i>z</i> refers to the logit coefficient.</p>
+        <div class="scroll"><table id="coefTable"><thead><tr>
+          <th>Term</th><th>β (T)</th><th>SE naive</th><th>SE dyadic</th><th>z</th>
+        </tr></thead><tbody></tbody></table></div>
+      </div>
+      <div class="card">
+        <h3>Consortia that passed validation</h3>
+        <p class="note">Thirty designs per strategy, each checked by four-strain thermodynamic FBA.
+        Pale bars: 10 mM ceiling. Solid: 0.1 mM.</p>
+        <div class="plot" id="designChart"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>A real hypersaline community, and two taxa introduced into it</h2>
+    <p class="sub">Seventeen curated genome-scale models on glycerol and dihydroxyacetone, plus
+    iJO1366 (<i>E. coli</i>) and iNJ661 (<i>M. tuberculosis</i>). <i>P</i> is the compatible-solute
+    pool a salt-out taxon must maintain, in mmol per gram dry weight.</p>
+    <div class="card">
+      <h3>Growth alone, and what osmoadaptation costs</h3>
+      <p class="note">Thermodynamic solutions. Each taxon runs from its growth at P = 0 (filled) to
+      its growth at P = 10 (open); salt-in taxa are insensitive by construction. Introduced taxa in red.</p>
+      <div class="plot" id="soloChart"></div>
+    </div>
+    <div class="grid" style="margin-top:1rem">
+      <div class="card">
+        <h3>Who grows next to whom</h3>
+        <p class="note">Growth of the focal taxon (columns) beside a selfish partner (rows) that keeps
+        95% of its solo growth. Thermodynamic solutions at P = 0.</p>
+        <div class="plot" id="pairHeat"></div>
+      </div>
+      <div class="card">
+        <h3>Invasion from rare</h3>
+        <p class="note">Growth of the introduced taxon relative to the mean of the residents that grow,
+        with residents protected at 95% (solid) and 99.9% (dashed) of their community growth.</p>
+        <div class="plot" id="invChart"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The prediction, tested against someone else's experiment</h2>
+    <p class="sub">Kehe et al. (2021) measured 20 soil bacteria in 40 carbon environments. Five of
+    those carbon sources were assayed at full strength and at one tenth of it, which dilutes every
+    by-product derived from them.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Facilitation at two carbon concentrations</h3>
+        <p class="note">Percentage of directed outcomes in which the donor helped the receiver.
+        Filled: full strength. Open: one tenth.</p>
+        <div class="plot" id="keheChart"></div>
+      </div>
+      <div class="card">
+        <h3>How the interactions shift</h3>
+        <p class="note">Share of pairs in each class, as classified by the original study.</p>
+        <div class="scroll"><table id="classTable"><thead><tr>
+          <th>Carbon</th><th>Mutual.</th><th>Commens.</th><th>Neutral.</th>
+          <th>Parasit.</th><th>Amens.</th><th>Compet.</th>
+        </tr></thead><tbody></tbody></table></div>
+        <p class="note" style="margin-top:0.7rem">Dilution raises the interaction energy by
+        <b id="kb">—</b> T (dyadic-robust z = <b id="kz">—</b>). Its dyadic-robust standard error is
+        <b id="ksd">—</b> against <b id="ksn">—</b> naive: treating co-culture pairs as independent
+        observations would overstate the evidence.</p>
+      </div>
+    </div>
+  </section>
+
+  <details class="src">
+    <summary>Where each number comes from</summary>
+    <div id="sources"></div>
+  </details>
+
+  <footer>
+    Outcomes from the benchmark and the hypersaline community are model predictions, not
+    measurements; the screen data are experimental. The exchange window could not be computed for
+    the screened strains, which have no published reconstructions, so that section tests the
+    pipeline's prediction rather than its mechanism.
+    <br><br>
+    Built with <code>python dashboard/build_dashboard.py</code> from the tables in
+    <code>dashboard/data/</code>. MIT licence.
+  </footer>
+</div>
+
+<script>
+const DATA = /*__DATA__*/;
+const SOURCES = /*__SOURCES__*/;
+
+(function () {
+  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const f1 = d3.format('.1f'), f2 = d3.format('.2f'), f3 = d3.format('.3f'), fi = d3.format(',');
+  const num = (v) => (v === null || v === undefined || v === '' ? NaN : +v);
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+  // ---------------------------------------------------------------- headline
+  const row = (t, pred) => DATA[t].find(pred);
+  set('t1', f1(num(row('benchmark_filter', (d) => d.ceiling === '10 uM').removed_pct)) + '%');
+  set('t2', f3(num(row('benchmark_cv', (d) => d.ceiling === '10 uM' && d.model === 'M3').ap)));
+  set('t3', String(num(row('benchmark_designs', (d) => d.ceiling === '0.1 mM' && d.strategy === 'thermodynamics').feasible)) + ' / 30');
+  set('t4', f2(num(DATA.kehe_model[0].odds_ratio)));
+  const km = DATA.kehe_model[0];
+  set('kb', f2(num(km.beta_energy_T))); set('kz', f2(num(km.z_dyadic)));
+  set('ksd', f3(num(km.se_dyadic))); set('ksn', f3(num(km.se_naive)));
+
+  // ------------------------------------------------------------------ tables
+  const tbody = (id, rows, cells) => {
+    const b = document.querySelector('#' + id + ' tbody');
+    b.replaceChildren();
+    rows.forEach((d) => {
+      const tr = document.createElement('tr');
+      cells(d).forEach((v, i) => {
+        const c = document.createElement(i === 0 ? 'th' : 'td');
+        if (i === 0) c.scope = 'row';
+        c.style.fontWeight = '400';
+        c.textContent = v;
+        tr.appendChild(c);
+      });
+      b.appendChild(tr);
+    });
+  };
+  tbody('coefTable', DATA.benchmark_coefficients, (d) =>
+    [d.term, f2(num(d.beta_energy)), f3(num(d.se_naive)), f3(num(d.se_dyadic)), f2(num(d.z_dyadic))]);
+  tbody('classTable', DATA.kehe_classes, (d) =>
+    [d.concentration, f1(num(d.Mutualism)), f1(num(d.Commensalism)), f1(num(d.Neutralism)),
+     f1(num(d.Parasitism)), f1(num(d.Amensalism)), f1(num(d.Competition))]);
+
+  const srcDiv = document.getElementById('sources');
+  Object.entries(SOURCES).forEach(([k, v]) => {
+    const p = document.createElement('p');
+    p.style.margin = '0.35rem 0';
+    p.innerHTML = '<code>' + k + '.csv</code> — ' + v + ' (' + DATA[k].length + ' rows)';
+    srcDiv.appendChild(p);
+  });
+
+  // ------------------------------------------------------------------ charts
+  const charts = [];
+  function chart(id, h, draw) { charts.push({ id, h, draw }); }
+
+  function frame(el, h) {
+    el.replaceChildren();
+    const w = Math.max(240, el.clientWidth || 320);
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('height', h)
+      .attr('viewBox', `0 0 ${w} ${h}`).style('display', 'block').style('overflow', 'visible');
+    const tip = d3.select(el).append('div').attr('class', 'tip');
+    return { svg, w, h, tip };
+  }
+  function show(tip, el, ev, html) {
+    const b = el.getBoundingClientRect();
+    tip.html(html).style('opacity', 1)
+      .style('left', Math.min(Math.max(6, ev.clientX - b.left + 12), Math.max(6, b.width - 160)) + 'px')
+      .style('top', Math.max(2, ev.clientY - b.top - 36) + 'px');
+  }
+  const hide = (tip) => tip.style('opacity', 0);
+  function axis(g, x, y, ih, iw, fmt, ticks) {
+    const dim = css('--dim'), grid = css('--grid');
+    g.append('g').attr('transform', `translate(0,${ih})`).call(d3.axisBottom(x).tickSizeOuter(0))
+      .attr('font-size', null).attr('font-family', null)
+      .call((s) => { s.selectAll('text').attr('fill', dim).style('font-size', '11px');
+                     s.selectAll('.domain,line').attr('stroke', grid); });
+    g.append('g').call(d3.axisLeft(y).ticks(ticks || 4).tickFormat(fmt).tickSize(0))
+      .attr('font-size', null).attr('font-family', null)
+      .call((s) => { s.select('.domain').remove();
+                     s.selectAll('text').attr('fill', dim).style('font-size', '11px'); });
+    g.selectAll('.gl').data(y.ticks(ticks || 4)).join('line').attr('class', 'gl')
+      .attr('x1', 0).attr('x2', iw).attr('y1', y).attr('y2', y).attr('stroke', grid);
+  }
+
+  // feasible pairs
+  chart('filterChart', 230, (el) => {
+    const order = ['10 mM', '1 mM', '0.1 mM', '10 uM'];
+    const r = DATA.benchmark_filter.slice().sort((a, b) => order.indexOf(a.ceiling) - order.indexOf(b.ceiling));
+    const { svg, w, tip } = frame(el, 230);
+    const m = { t: 14, r: 8, b: 26, l: 36 }, iw = w - m.l - m.r, ih = 230 - m.t - m.b;
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const lbl = (c) => c.replace(' uM', ' µM');
+    const x = d3.scaleBand().domain(r.map((d) => lbl(d.ceiling))).range([0, iw]).padding(0.32);
+    const y = d3.scaleLinear([0, 560], [ih, 0]);
+    axis(g, x, y, ih, iw, fi);
+    const blue = css('--blue');
+    r.forEach((d) => {
+      const cx = x(lbl(d.ceiling));
+      g.append('rect').attr('x', cx).attr('y', y(num(d.pairs_stoichiometric)))
+        .attr('width', x.bandwidth()).attr('height', ih - y(num(d.pairs_stoichiometric)))
+        .attr('rx', 3).attr('fill', blue).attr('opacity', 0.22);
+      g.append('rect').attr('x', cx).attr('y', y(num(d.pairs_thermodynamic)))
+        .attr('width', x.bandwidth()).attr('height', ih - y(num(d.pairs_thermodynamic)))
+        .attr('rx', 3).attr('fill', blue)
+        .on('pointerenter pointermove', (ev) => show(tip, el, ev,
+          `<span class="k">${lbl(d.ceiling)}</span>${fi(num(d.pairs_thermodynamic))} of ${fi(num(d.pairs_stoichiometric))} pairs`))
+        .on('pointerleave', () => hide(tip));
+      g.append('text').attr('x', cx + x.bandwidth() / 2).attr('y', y(num(d.pairs_thermodynamic)) + 17)
+        .attr('text-anchor', 'middle').attr('fill', css('--bg'))
+        .style('font-size', '11px').style('font-weight', '600')
+        .text('−' + f1(num(d.removed_pct)) + '%');
+    });
+  });
+
+  // average precision
+  chart('cvChart', 230, (el) => {
+    const order = ['10 mM', '1 mM', '0.1 mM', '10 uM'];
+    const { svg, w, tip } = frame(el, 230);
+    const m = { t: 14, r: 34, b: 26, l: 34 }, iw = w - m.l - m.r, ih = 230 - m.t - m.b;
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const lbl = (c) => c.replace(' uM', ' µM');
+    const x = d3.scalePoint().domain(order.map(lbl)).range([0, iw]).padding(0.45);
+    const y = d3.scaleLinear([0.5, 1], [ih, 0]);
+    axis(g, x, y, ih, iw, d3.format('.1f'));
+    [['M2', css('--dim')], ['M3', css('--accent')]].forEach(([mo, col]) => {
+      const pts = order.map((c) => {
+        const d = DATA.benchmark_cv.find((v) => v.ceiling === c && v.model === mo);
+        return d ? { c: lbl(c), ap: num(d.ap), model: mo } : null;
+      }).filter(Boolean);
+      g.append('path').datum(pts).attr('fill', 'none').attr('stroke', col).attr('stroke-width', 2)
+        .attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+        .attr('d', d3.line().x((p) => x(p.c)).y((p) => y(p.ap)));
+      g.selectAll(null).data(pts).join('circle')
+        .attr('cx', (p) => x(p.c)).attr('cy', (p) => y(p.ap)).attr('r', 4).attr('fill', col)
+        .on('pointerenter pointermove', (ev, p) => show(tip, el, ev,
+          `<span class="k">${p.c} · ${p.model}</span>average precision ${f3(p.ap)}`))
+        .on('pointerleave', () => hide(tip));
+      const last = pts[pts.length - 1];
+      g.append('text').attr('x', x(last.c) + 6).attr('y', y(last.ap) + 4).attr('fill', col)
+        .style('font-size', '11px').style('font-weight', '600').text(mo);
+    });
+  });
+
+  // designs
+  chart('designChart', 230, (el) => {
+    const strat = ['random', 'stoichiometry', 'thermodynamics'];
+    const { svg, w, tip } = frame(el, 230);
+    const m = { t: 14, r: 8, b: 32, l: 32 }, iw = w - m.l - m.r, ih = 230 - m.t - m.b;
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const x = d3.scaleBand().domain(strat).range([0, iw]).padding(0.3);
+    const xi = d3.scaleBand().domain(['10 mM', '0.1 mM']).range([0, x.bandwidth()]).padding(0.14);
+    const y = d3.scaleLinear([0, 32], [ih, 0]);
+    axis(g, x, y, ih, iw, d3.format('d'));
+    DATA.benchmark_designs.forEach((d) => {
+      const col = d.strategy === 'thermodynamics' ? css('--accent') : css('--blue');
+      const v = num(d.feasible);
+      g.append('rect').attr('x', x(d.strategy) + xi(d.ceiling)).attr('y', y(v))
+        .attr('width', xi.bandwidth()).attr('height', ih - y(v)).attr('rx', 3)
+        .attr('fill', col).attr('opacity', d.ceiling === '0.1 mM' ? 1 : 0.3)
+        .on('pointerenter pointermove', (ev) => show(tip, el, ev,
+          `<span class="k">${d.strategy}, ${d.ceiling}</span>${v} of ${num(d.tested)} feasible`))
+        .on('pointerleave', () => hide(tip));
+    });
+  });
+
+  // solo growth
+  chart('soloChart', 300, (el) => {
+    const r0 = DATA.hypersaline_solo.filter((d) => d.method === 'TFA');
+    const byTaxon = d3.group(r0, (d) => d.taxon);
+    const data = Array.from(byTaxon, ([taxon, v]) => ({
+      taxon, role: v[0].role, strategy: v[0].strategy,
+      lo: num(v.find((d) => +d.P === 10)?.mu), hi: num(v.find((d) => +d.P === 0)?.mu),
+    })).filter((d) => Number.isFinite(d.hi)).sort((a, b) => b.hi - a.hi);
+    const { svg, w, tip } = frame(el, 300);
+    const m = { t: 8, r: 12, b: 26, l: 112 }, iw = Math.max(80, w - m.l - m.r), ih = 300 - m.t - m.b;
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const y = d3.scaleBand().domain(data.map((d) => d.taxon)).range([0, ih]).padding(0.28);
+    const x = d3.scaleLinear([0, d3.max(data, (d) => d.hi)], [0, iw]).nice();
+    const dim = css('--dim'), fg = css('--fg'), blue = css('--blue'), red = css('--accent');
+    g.append('g').attr('transform', `translate(0,${ih})`).call(d3.axisBottom(x).ticks(5).tickSizeOuter(0))
+      .attr('font-size', null).attr('font-family', null)
+      .call((s) => { s.selectAll('text').attr('fill', dim).style('font-size', '11px');
+                     s.selectAll('.domain,line').attr('stroke', css('--grid')); });
+    g.selectAll('.gl').data(x.ticks(5)).join('line').attr('class', 'gl')
+      .attr('y1', 0).attr('y2', ih).attr('x1', x).attr('x2', x).attr('stroke', css('--grid'));
+    g.append('g').call(d3.axisLeft(y).tickSize(0)).attr('font-size', null).attr('font-family', null)
+      .call((s) => { s.select('.domain').remove();
+        s.selectAll('text').attr('fill', (t) => (byTaxon.get(t)[0].role === 'introduced' ? red : dim))
+          .style('font-size', '10px')
+          .style('font-weight', (t) => (byTaxon.get(t)[0].role === 'introduced' ? '600' : '400')); });
+    data.forEach((d) => {
+      const cy = y(d.taxon) + y.bandwidth() / 2;
+      const col = d.role === 'introduced' ? red : blue;
+      if (Number.isFinite(d.lo) && Math.abs(d.hi - d.lo) > 1e-6) {
+        g.append('line').attr('x1', x(d.lo)).attr('x2', x(d.hi)).attr('y1', cy).attr('y2', cy)
+          .attr('stroke', col).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('opacity', 0.4);
+        g.append('circle').attr('cx', x(d.lo)).attr('cy', cy).attr('r', 3.4)
+          .attr('fill', css('--panel')).attr('stroke', col).attr('stroke-width', 1.5);
+      }
+      g.append('circle').attr('cx', x(d.hi)).attr('cy', cy).attr('r', 3.8).attr('fill', col)
+        .on('pointerenter pointermove', (ev) => show(tip, el, ev,
+          `<span class="k">${d.taxon} · ${d.strategy}</span>P = 0: ${f3(d.hi)} h⁻¹` +
+          (Number.isFinite(d.lo) ? `<br>P = 10: ${f3(d.lo)} h⁻¹` : '')))
+        .on('pointerleave', () => hide(tip));
+    });
+  });
+
+  // pair heatmap
+  chart('pairHeat', 300, (el) => {
+    const r = DATA.hypersaline_pairs.filter((d) => d.method === 'TFA' && +d.P === 0);
+    const solo = DATA.hypersaline_solo.filter((d) => d.method === 'TFA' && +d.P === 0);
+    const intro = new Set(solo.filter((d) => d.role === 'introduced').map((d) => d.taxon));
+    const score = new Map(solo.map((d) => [d.taxon, num(d.mu)]));
+    const names = Array.from(new Set(r.map((d) => d.focal)))
+      .sort((a, b) => (intro.has(a) - intro.has(b)) || ((score.get(b) || 0) - (score.get(a) || 0)));
+    const { svg, w, tip } = frame(el, 300);
+    const m = { t: 6, r: 6, b: 60, l: 60 }, iw = Math.max(60, w - m.l - m.r), ih = 300 - m.t - m.b;
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const x = d3.scaleBand().domain(names).range([0, iw]).padding(0.05);
+    const y = d3.scaleBand().domain(names).range([0, ih]).padding(0.05);
+    const ramp = d3.interpolateRgb(css('--bg'), css('--blue'));
+    const mx = d3.max(r, (d) => num(d.mu_focal));
+    g.selectAll(null).data(r).join('rect')
+      .attr('x', (d) => x(d.focal)).attr('y', (d) => y(d.partner))
+      .attr('width', x.bandwidth()).attr('height', y.bandwidth())
+      .attr('fill', (d) => ramp(Math.min(1, num(d.mu_focal) / mx)))
+      .on('pointerenter pointermove', (ev, d) => show(tip, el, ev,
+        `<span class="k">${d.focal} beside ${d.partner}</span>${f3(num(d.mu_focal))} h⁻¹`))
+      .on('pointerleave', () => hide(tip));
+    const dim = css('--dim'), red = css('--accent');
+    const style = (s) => s.attr('fill', (t) => (intro.has(t) ? red : dim)).style('font-size', '8px')
+      .style('font-weight', (t) => (intro.has(t) ? '600' : '400'));
+    g.append('g').attr('transform', `translate(0,${ih})`).call(d3.axisBottom(x).tickSize(0))
+      .attr('font-size', null).attr('font-family', null)
+      .call((s) => { s.select('.domain').remove();
+        style(s.selectAll('text')).attr('text-anchor', 'end').attr('transform', 'rotate(-55)')
+          .attr('dx', '-0.4em').attr('dy', '0.15em'); });
+    g.append('g').call(d3.axisLeft(y).tickSize(0)).attr('font-size', null).attr('font-family', null)
+      .call((s) => { s.select('.domain').remove(); style(s.selectAll('text')); });
+  });
+
+  // invasion
+  chart('invChart', 250, (el) => {
+    const r = DATA.hypersaline_invasion;
+    const { svg, w, tip } = frame(el, 250);
+    const m = { t: 18, r: 54, b: 30, l: 34 }, iw = Math.max(80, w - m.l - m.r), ih = 250 - m.t - m.b;
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const ps = Array.from(new Set(r.map((d) => +d.P))).sort(d3.ascending);
+    const x = d3.scalePoint().domain(ps).range([0, iw]).padding(0.4);
+    const y = d3.scaleLinear([0, d3.max(r, (d) => num(d.ratio))], [ih, 0]).nice();
+    axis(g, x, y, ih, iw, d3.format('.1f'));
+    const inv = Array.from(new Set(r.map((d) => d.invader)));
+    inv.forEach((name, i) => {
+      const col = i === 0 ? css('--accent') : css('--blue');
+      ['95%', '99.9%'].forEach((pro) => {
+        const pts = r.filter((d) => d.invader === name && d.protect === pro).sort((a, b) => +a.P - +b.P);
+        if (!pts.length) return;
+        g.append('path').datum(pts).attr('fill', 'none').attr('stroke', col).attr('stroke-width', 2)
+          .attr('stroke-linecap', 'round').attr('stroke-dasharray', pro === '95%' ? null : '4 3')
+          .attr('d', d3.line().x((p) => x(+p.P)).y((p) => y(num(p.ratio))));
+        g.selectAll(null).data(pts).join('circle')
+          .attr('cx', (p) => x(+p.P)).attr('cy', (p) => y(num(p.ratio))).attr('r', 3.4)
+          .attr('fill', pro === '95%' ? col : css('--panel')).attr('stroke', col).attr('stroke-width', 1.5)
+          .on('pointerenter pointermove', (ev, p) => show(tip, el, ev,
+            `<span class="k">${p.invader} · P = ${+p.P} · residents ≥ ${p.protect}</span>` +
+            `${f2(num(p.ratio))}× the mean resident (${f3(num(p.mu_inv))} h⁻¹)`))
+          .on('pointerleave', () => hide(tip));
+        if (pro === '95%') {
+          const last = pts[pts.length - 1];
+          g.append('text').attr('x', x(+last.P) + 6).attr('y', y(num(last.ratio)) + 4)
+            .attr('fill', col).style('font-size', '10px').style('font-weight', '600')
+            .text(name.slice(0, 5) + '.');
+        }
+      });
+    });
+    g.append('text').attr('x', 0).attr('y', -6).attr('fill', css('--dim'))
+      .style('font-size', '10px').text('solid: residents ≥ 95%   dashed: ≥ 99.9%');
+  });
+
+  // Kehe
+  chart('keheChart', 250, (el) => {
+    const r = DATA.kehe_paired;
+    const carbons = Array.from(new Set(r.map((d) => d.carbon))).sort();
+    const { svg, w, tip } = frame(el, 250);
+    const m = { t: 12, r: 14, b: 28, l: 70 }, iw = Math.max(80, w - m.l - m.r), ih = 250 - m.t - m.b;
+    const g = svg.append('g').attr('transform', `translate(${m.l},${m.t})`);
+    const y = d3.scaleBand().domain(carbons).range([0, ih]).padding(0.35);
+    const x = d3.scaleLinear([0, d3.max(r, (d) => num(d.facilitation_pct)) * 1.12], [0, iw]).nice();
+    const dim = css('--dim');
+    g.append('g').attr('transform', `translate(0,${ih})`).call(d3.axisBottom(x).ticks(5).tickSizeOuter(0))
+      .attr('font-size', null).attr('font-family', null)
+      .call((s) => { s.selectAll('text').attr('fill', dim).style('font-size', '11px');
+                     s.selectAll('.domain,line').attr('stroke', css('--grid')); });
+    g.selectAll('.gl').data(x.ticks(5)).join('line').attr('class', 'gl')
+      .attr('y1', 0).attr('y2', ih).attr('x1', x).attr('x2', x).attr('stroke', css('--grid'));
+    g.append('g').call(d3.axisLeft(y).tickSize(0)).attr('font-size', null).attr('font-family', null)
+      .call((s) => { s.select('.domain').remove();
+                     s.selectAll('text').attr('fill', dim).style('font-size', '11px'); });
+    const col = css('--accent');
+    carbons.forEach((c) => {
+      const full = r.find((d) => d.carbon === c && d.concentration === '1x');
+      const dil = r.find((d) => d.carbon === c && d.concentration === '0.1x');
+      if (!full || !dil) return;
+      const cy = y(c) + y.bandwidth() / 2;
+      g.append('line').attr('x1', x(num(dil.facilitation_pct))).attr('x2', x(num(full.facilitation_pct)))
+        .attr('y1', cy).attr('y2', cy).attr('stroke', col).attr('stroke-width', 2)
+        .attr('stroke-linecap', 'round').attr('opacity', 0.35);
+      [[dil, false], [full, true]].forEach(([d, filled]) => {
+        g.append('circle').attr('cx', x(num(d.facilitation_pct))).attr('cy', cy).attr('r', 4.2)
+          .attr('fill', filled ? col : css('--panel')).attr('stroke', col).attr('stroke-width', 1.6)
+          .on('pointerenter pointermove', (ev) => show(tip, el, ev,
+            `<span class="k">${c}, ${filled ? 'full strength' : 'one tenth'}</span>` +
+            `${f1(num(d.facilitation_pct))}% facilitation of ${fi(num(d.n))}`))
+          .on('pointerleave', () => hide(tip));
+      });
+    });
+  });
+
+  // ------------------------------------------------------------- draw & theme
+  function drawAll() {
+    charts.forEach(({ id, draw }) => {
+      const el = document.getElementById(id);
+      if (el) { try { draw(el); } catch (e) { el.textContent = 'This chart could not be drawn.'; } }
+    });
+  }
+  drawAll();
+  let t;
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(drawAll, 150); });
+
+  const btn = document.getElementById('theme');
+  const dark = () => (document.documentElement.dataset.theme === 'dark') ||
+    (!document.documentElement.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+  const label = () => { btn.textContent = dark() ? 'Light' : 'Dark'; };
+  label();
+  btn.addEventListener('click', () => {
+    document.documentElement.dataset.theme = dark() ? 'light' : 'dark';
+    label(); drawAll();
+  });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { label(); drawAll(); });
+})();
+</script>
+</body>
+</html>
