@@ -1,0 +1,9 @@
+streamlit>=1.36
+pandas>=2.0
+numpy>=1.24
+scipy>=1.11
+cobra>=0.29
+openpyxl>=3.1
+altair>=5.0
+pyscipopt>=5.0
+equilibrator-api>=0.6

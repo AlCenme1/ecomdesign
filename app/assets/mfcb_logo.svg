@@ -1,0 +1,27 @@
+<svg width="400" height="470" viewBox="0 0 400 470" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="200" cy="165" r="150" fill="#1B3A4B"/>
+  <circle cx="200" cy="165" r="150" fill="none" stroke="#8C1D1D" stroke-width="4"/>
+
+  <path d="M 105 210 C 148 105, 252 210, 295 105" fill="none" stroke="#F4EDE4" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+
+  <line x1="140" y1="115" x2="200" y2="88" stroke="#8C1D1D" stroke-width="2.5" opacity="0.85"/>
+  <line x1="200" y1="88" x2="260" y2="115" stroke="#8C1D1D" stroke-width="2.5" opacity="0.85"/>
+  <line x1="140" y1="115" x2="158" y2="200" stroke="#8C1D1D" stroke-width="2.5" opacity="0.85"/>
+  <line x1="260" y1="115" x2="242" y2="200" stroke="#8C1D1D" stroke-width="2.5" opacity="0.85"/>
+  <line x1="158" y1="200" x2="242" y2="200" stroke="#8C1D1D" stroke-width="2.5" opacity="0.85"/>
+  <line x1="200" y1="88" x2="200" y2="152" stroke="#8C1D1D" stroke-width="2.5" opacity="0.6"/>
+  <line x1="158" y1="200" x2="200" y2="152" stroke="#8C1D1D" stroke-width="2.5" opacity="0.6"/>
+  <line x1="242" y1="200" x2="200" y2="152" stroke="#8C1D1D" stroke-width="2.5" opacity="0.6"/>
+
+  <circle cx="200" cy="88" r="8" fill="#F4EDE4"/>
+  <circle cx="140" cy="115" r="8" fill="#F4EDE4"/>
+  <circle cx="260" cy="115" r="8" fill="#F4EDE4"/>
+  <circle cx="158" cy="200" r="8" fill="#F4EDE4"/>
+  <circle cx="242" cy="200" r="8" fill="#F4EDE4"/>
+  <circle cx="200" cy="152" r="6" fill="#8C1D1D" stroke="#F4EDE4" stroke-width="2"/>
+
+  <text x="200" y="360" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700" fill="#1B3A4B" letter-spacing="4">MFCB</text>
+  <line x1="130" y1="378" x2="270" y2="378" stroke="#8C1D1D" stroke-width="2"/>
+  <text x="200" y="402" text-anchor="middle" font-family="Georgia, serif" font-size="12" letter-spacing="1" fill="#1B3A4B">MATHEMATICAL FOUNDATION</text>
+  <text x="200" y="428" text-anchor="middle" font-family="Georgia, serif" font-size="12" letter-spacing="1" fill="#8C1D1D">COMPUTATIONAL BIOLOGY</text>
+</svg>
