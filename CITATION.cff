@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the paper."
+title: "ecomdesign"
+abstract: "Thermodynamic exchange windows and a Fermi-Dirac interaction model for the energy-aware design of microbial consortia."
+authors:
+  - family-names: "Centeno-Mejia"
+    given-names: "Alex A."
+    affiliation: "Universidad Catolica del Maule"
+license: MIT
+repository-code: "https://github.com/AlCenme1/ecomdesign"
+version: "0.1.0"
+date-released: "2026-11-03"
