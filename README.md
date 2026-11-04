@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/AlCenme1/ecomdesign/main/app/assets/mfcb_logo.png" alt="MFCB" height="150">
+</p>
+
 # ecomdesign
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AlCenme1/ecomdesign/blob/main/notebooks/ecomdesign_colab.ipynb)
