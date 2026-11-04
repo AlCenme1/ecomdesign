@@ -1,4 +1,8 @@
-# ECOMDESIGN
+# ecomdesign
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AlCenme1/ecomdesign/blob/main/notebooks/ecomdesign_colab.ipynb)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 
 Energy-aware design of microbial consortia: thermodynamic exchange windows + Fermi–Dirac dyadic interaction model.
 
@@ -104,3 +108,32 @@ Zenodo and cutting a release mints a DOI, which is what the manuscript's
 truth. `manuscript/cas/` holds the Elsevier CAS version for *Computational
 Biology and Chemistry*, generated from it with `build_cas.py` (see the README
 in that folder) — edit the working file, then rebuild.
+
+
+## Putting the app online
+
+The app runs unchanged on Streamlit Community Cloud or Hugging Face Spaces.
+Point the service at this repository and at `app/streamlit_app.py`; the
+root `requirements.txt` is what it installs. `pyscipopt` ships SCIP inside its
+wheel, so no system packages are needed.
+
+Two limits of a free tier are worth knowing before you share the link:
+
+- **Memory.** A free instance has about 1 GB. Genome-scale models are large,
+  so keep a hosted study to a few strains; the 17-taxon case study belongs on
+  your own machine, where it takes hours of solver time.
+- **Gibbs energies.** `equilibrator-api` is not installed online, because its
+  first run downloads a compound cache far larger than the tier allows. The
+  app therefore reads the energies from the workbook's `gibbs` sheet. Without
+  that sheet it still runs, but no reaction receives a thermodynamic
+  constraint and the results are ordinary flux balance analysis — the app says
+  so before you press Run.
+
+
+## Running it in Colab
+
+`notebooks/ecomdesign_colab.ipynb` runs the pipeline in a browser with nothing
+installed locally: it checks an input workbook, reproduces the benchmark, shows
+the fitted interaction energies with both standard errors, and redraws the
+figures. Click the badge at the top of this file. The first cell installs the
+dependencies and takes a few minutes; the rest are quick.

@@ -1,0 +1,11 @@
+# Deployment requirements for Streamlit Community Cloud or Hugging Face Spaces.
+# equilibrator-api is deliberately absent: its first run downloads a large
+# compound cache that does not fit a free tier. Supply the standard Gibbs
+# energies in the workbook's "gibbs" sheet instead, or precompute them locally.
+streamlit>=1.36
+pandas>=2.0
+numpy>=1.24
+scipy>=1.11
+cobra>=0.29
+openpyxl>=3.1
+pyscipopt>=5.0
