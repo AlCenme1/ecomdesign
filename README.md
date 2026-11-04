@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AlCenme1/ecomdesign/main/app/assets/mfcb_logo.png" alt="MFCB" height="150">
+  <img src="https://raw.githubusercontent.com/AlCenme1/ecomdesign/main/app/assets/mfcb_logo.png" alt="MFCB" height="250">
 </p>
 
 # ecomdesign
