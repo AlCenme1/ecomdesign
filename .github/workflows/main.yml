@@ -1,0 +1,48 @@
+# Publishes the dashboard at https://<user>.github.io/<repo>/
+#
+# Runs on every push to the default branch, whatever it is called, and can also
+# be started by hand from the Actions tab (Run workflow). If the build script
+# fails, the committed dashboard/index.html is published instead, so the site
+# never disappears because of a bad data file.
+name: dashboard
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas
+      - name: Rebuild the page from dashboard/data
+        run: python dashboard/build_dashboard.py || echo "build failed; publishing the committed index.html"
+      - name: Fail early if there is nothing to publish
+        run: test -f dashboard/index.html || (echo "dashboard/index.html is missing from the repository" && exit 1)
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dashboard
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
