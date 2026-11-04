@@ -1,0 +1,35 @@
+0.01 cv+fit 4 s
+                                        auc     ap
+model                                             
+FBA score K (no fit)                  0.993  0.986
+M0: node traits                       0.939  0.822
+M1: + competition                     0.939  0.827
+M2: + stoichiometric complementarity  0.989  0.981
+M3: + thermodynamic window            0.988  0.976
+0.001 cv+fit 8 s
+                                        auc     ap
+model                                             
+FBA score K (no fit)                  0.993  0.986
+M0: node traits                       0.939  0.822
+M1: + competition                     0.939  0.827
+M2: + stoichiometric complementarity  0.989  0.981
+M3: + thermodynamic window            0.988  0.976
+0.0001 cv+fit 12 s
+                                        auc     ap
+model                                             
+FBA score K (no fit)                  0.928  0.724
+M0: node traits                       0.918  0.726
+M1: + competition                     0.916  0.736
+M2: + stoichiometric complementarity  0.918  0.735
+M3: + thermodynamic window            0.976  0.934
+1e-05 cv+fit 16 s
+                                        auc     ap
+model                                             
+FBA score K (no fit)                  0.892  0.587
+M0: node traits                       0.879  0.538
+M1: + competition                     0.872  0.566
+M2: + stoichiometric complementarity  0.878  0.589
+M3: + thermodynamic window            0.966  0.862
+REM: sigma 4.23 Tc 1.101
+0.01 {'M2 design': 1.0, 'M3 design': 1.0, 'random': 0.133} 115 s
+0.0001 {'M2 design': 0.667, 'M3 design': 1.0, 'random': 0.1} 206 s
